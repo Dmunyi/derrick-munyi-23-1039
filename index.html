@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exotic Car Dealership</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <nav>
@@ -22,8 +23,6 @@
 
     <section id="top">
         <h2>Top Exotic Cars</h2>
-        <img src="images.jfif" alt="Exotic sports car" width="600">
-        <img src="Porsche-911-GT3-RS.jpg" alt="Exotic sports car" width="600">
         <h3 id="featured">Featured Models</h3>
         <ol>
             <li>Lamborghini Aventador</li>
@@ -44,40 +43,53 @@
             <li>Certified pre-owned inspections</li>
         </ul>
 
-        
+        <div class="media-grid">
+            <div class="media-card">
+                <img src="images.jfif" alt="Exotic sports car">
+            </div>
+            <div class="media-card">
+                <img src="Porsche-911-GT3-RS.jpg" alt="Exotic sports car">
+            </div>
+            <div class="media-card">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Music video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="media-card">
+                <video controls>
+                    <source src="video/video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
 
-        <iframe width="560" height="315"
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ">
-           
-            title="Music videos"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-        </iframe>
-
-        <h3 id="comparison">Car Comparison Table</h3>
-        <table border="1" cellpadding="8" cellspacing="0">
-            <tr>
-                <th>Model</th>
-                <th>Top Speed</th>
-                <th>0-60 mph</th>
-            </tr>
-            <tr>
-                <td>Lamborghini Aventador</td>
-                <td>217 mph</td>
-                <td>2.8 sec</td>
-            </tr>
-            <tr>
-                <td>Ferrari SF90 Stradale</td>
-                <td>211 mph</td>
-                <td>2.5 sec</td>
-            </tr>
-            <tr>
-                <td>McLaren 720S</td>
-                <td>212 mph</td>
-                <td>2.8 sec</td>
-            </tr>
-        </table>
+        <section class="comparison-section" id="comparison">
+            <h2>Car Comparison Table</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Model</th>
+                        <th>Top Speed</th>
+                        <th>0-60 mph</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Lamborghini Aventador</td>
+                        <td>217 mph</td>
+                        <td>2.8 sec</td>
+                    </tr>
+                    <tr>
+                        <td>Ferrari SF90 Stradale</td>
+                        <td>211 mph</td>
+                        <td>2.5 sec</td>
+                    </tr>
+                    <tr>
+                        <td>McLaren 720S</td>
+                        <td>212 mph</td>
+                        <td>2.8 sec</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
     </section>
 </body>
 </html>
