@@ -96,21 +96,33 @@ window.addEventListener('DOMContentLoaded', function() {
         <h2>Contact Us</h2>
         <p>Share your details to receive exclusive offers and the latest updates on exotic cars.</p>
         <form id="contact-form">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" required>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+                <span class="error-message">Please fill in your name</span>
+            </div>
 
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="example@gmail.com" required>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="example@gmail.com" required>
+                <span class="error-message">Please fill in your email address</span>
+            </div>
 
-            <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+                <span class="error-message">Please fill in your phone number</span>
+            </div>
 
-            <label for="gender">Gender</label>
-            <select id="gender" name="gender" required>
-                <option value="" disabled selected>Select your gender</option>
-                <option value="female">Female</option>
-                <option value="male">Male</option>
-            </select>
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select id="gender" name="gender" required>
+                    <option value="" disabled selected>Select your gender</option>
+                    <option value="female">Female</option>
+                    <option value="male">Male</option>
+                </select>
+                <span class="error-message">Please select your gender</span>
+            </div>
 
             <button type="submit">Submit</button>
         </form>
@@ -121,10 +133,37 @@ window.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('contact-form');
     form.addEventListener('submit', function(event) {
         event.preventDefault();
+        
+        // Clear previous errors
+        const formGroups = form.querySelectorAll('.form-group');
+        formGroups.forEach(group => group.classList.remove('has-error'));
+        
+        const inputs = form.querySelectorAll('input, select');
+        let isValid = true;
+        
+        // Validate each field
+        inputs.forEach(input => {
+            if (!input.value.trim()) {
+                input.classList.add('error');
+                input.closest('.form-group').classList.add('has-error');
+                isValid = false;
+            } else {
+                input.classList.remove('error');
+                input.closest('.form-group').classList.remove('has-error');
+            }
+        });
+        
+        if (!isValid) {
+            PopupManager.error('Form Incomplete', 'Please fill in all the required fields to proceed.');
+            return;
+        }
+        
         const name = document.getElementById('name').value;
         PopupManager.success('Success!', `Thank you, ${name}! Your contact request has been received.`, {
             onConfirm() {
                 form.reset();
+                formGroups.forEach(group => group.classList.remove('has-error'));
+                inputs.forEach(input => input.classList.remove('error'));
             }
         });
     });
