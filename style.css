@@ -445,21 +445,13 @@ tbody td:first-child {
     flex-direction: column;
 }
 
-#form-error-message {
+.form-error-message {
     color: #f44336;
-    font-size: 0.9rem;
-    margin-top: 12px;
+    font-size: 0.95rem;
+    margin-top: 10px;
     display: none;
     font-weight: 600;
     text-align: center;
-    padding: 12px;
-    background: rgba(244, 67, 54, 0.15);
-    border-radius: 8px;
-    border: 1px solid rgba(244, 67, 54, 0.3);
-}
-
-#form-error-message.show {
-    display: block;
 }
 
 @media (max-width: 720px) {
