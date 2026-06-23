@@ -99,19 +99,16 @@ window.addEventListener('DOMContentLoaded', function() {
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" required>
-                <span class="error-message">Please fill in your name</span>
             </div>
 
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="example@gmail.com" required>
-                <span class="error-message">Please fill in your email address</span>
             </div>
 
             <div class="form-group">
                 <label for="phone">Phone Number</label>
                 <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
-                <span class="error-message">Please fill in your phone number</span>
             </div>
 
             <div class="form-group">
@@ -121,22 +118,20 @@ window.addEventListener('DOMContentLoaded', function() {
                     <option value="female">Female</option>
                     <option value="male">Male</option>
                 </select>
-                <span class="error-message">Please select your gender</span>
             </div>
 
             <button type="submit">Submit</button>
+            <div id="form-error-message">Please fill in missing details</div>
         </form>
     `;
 
     document.body.appendChild(contactSection);
 
     const form = document.getElementById('contact-form');
+    const errorMessage = document.getElementById('form-error-message');
+    
     form.addEventListener('submit', function(event) {
         event.preventDefault();
-        
-        // Clear previous errors
-        const formGroups = form.querySelectorAll('.form-group');
-        formGroups.forEach(group => group.classList.remove('has-error'));
         
         const inputs = form.querySelectorAll('input, select');
         let isValid = true;
@@ -145,24 +140,22 @@ window.addEventListener('DOMContentLoaded', function() {
         inputs.forEach(input => {
             if (!input.value.trim()) {
                 input.classList.add('error');
-                input.closest('.form-group').classList.add('has-error');
                 isValid = false;
             } else {
                 input.classList.remove('error');
-                input.closest('.form-group').classList.remove('has-error');
             }
         });
         
         if (!isValid) {
-            PopupManager.error('Form Incomplete', 'Please fill in all the required fields to proceed.');
+            errorMessage.classList.add('show');
             return;
         }
         
+        errorMessage.classList.remove('show');
         const name = document.getElementById('name').value;
         PopupManager.success('Success!', `Thank you, ${name}! Your contact request has been received.`, {
             onConfirm() {
                 form.reset();
-                formGroups.forEach(group => group.classList.remove('has-error'));
                 inputs.forEach(input => input.classList.remove('error'));
             }
         });
