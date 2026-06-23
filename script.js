@@ -121,22 +121,23 @@ window.addEventListener('DOMContentLoaded', function() {
             </div>
 
             <button type="submit">Submit</button>
-            <div id="form-error-message">Please fill in missing details</div>
+            <div id="form-error-message" class="form-error-message">Please fill in missing details</div>
         </form>
     `;
 
     document.body.appendChild(contactSection);
 
     const form = document.getElementById('contact-form');
-    const errorMessage = document.getElementById('form-error-message');
-    
+    const formErrorMessage = document.getElementById('form-error-message');
+
     form.addEventListener('submit', function(event) {
         event.preventDefault();
         
+        // Clear previous error state
         const inputs = form.querySelectorAll('input, select');
         let isValid = true;
-        
-        // Validate each field
+        formErrorMessage.style.display = 'none';
+
         inputs.forEach(input => {
             if (!input.value.trim()) {
                 input.classList.add('error');
@@ -145,18 +146,18 @@ window.addEventListener('DOMContentLoaded', function() {
                 input.classList.remove('error');
             }
         });
-        
+
         if (!isValid) {
-            errorMessage.classList.add('show');
+            formErrorMessage.style.display = 'block';
             return;
         }
-        
-        errorMessage.classList.remove('show');
+
         const name = document.getElementById('name').value;
         PopupManager.success('Success!', `Thank you, ${name}! Your contact request has been received.`, {
             onConfirm() {
                 form.reset();
                 inputs.forEach(input => input.classList.remove('error'));
+                formErrorMessage.style.display = 'none';
             }
         });
     });
