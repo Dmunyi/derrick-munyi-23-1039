@@ -1,4 +1,3 @@
-// Advanced Popup System
 const PopupManager = {
     overlay: null,
     modal: null,
