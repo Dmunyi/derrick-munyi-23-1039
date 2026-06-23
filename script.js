@@ -95,7 +95,7 @@ window.addEventListener('DOMContentLoaded', function() {
     contactSection.innerHTML = `
         <h2>Contact Us</h2>
         <p>Share your details to receive exclusive offers and the latest updates on exotic cars.</p>
-        <form id="contact-form">
+        <form id="contact-form" novalidate>
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" required>
