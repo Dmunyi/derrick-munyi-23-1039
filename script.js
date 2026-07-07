@@ -104,7 +104,7 @@ window.addEventListener('DOMContentLoaded', function() {
     PopupManager.init();
 
     // Welcome popup
-    PopupManager.info('Welcome!', 'Welcome to Exotic Car Dealership! Explore top exotic cars, featured models, and sign up for exclusive updates.');
+    PopupManager.info('Welcome!', 'Monach Automotive Group! Explore top exotic cars, featured models, and sign up for exclusive updates.');
 
     const contactSection = document.createElement('section');
     contactSection.id = 'contact-form-section';
