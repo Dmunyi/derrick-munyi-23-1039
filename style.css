@@ -137,6 +137,7 @@ section {
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.20);
 }
 
+/* Advanced Popup Styles */
 .popup-overlay {
     display: none;
     position: fixed;
@@ -412,58 +413,7 @@ tbody td:first-child {
     font-weight: 600;
 }
 
-.cars-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 16px;
-    margin-top: 16px;
-}
-
-.car-card {
-    padding: 18px;
-    border-radius: 16px;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(247, 201, 72, 0.22);
-}
-
-.car-card h3 {
-    margin: 0 0 10px;
-    color: #f7c948;
-}
-
-.car-card p {
-    margin: 0 0 12px;
-}
-
-.car-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    font-size: 0.95rem;
-    color: var(--muted);
-}
-
-.inventory-status,
-.form-status {
-    margin-top: 10px;
-    font-weight: 600;
-}
-
-.inventory-status.warning,
-.form-status.error {
-    color: #f44336;
-}
-
-.inventory-status.success,
-.form-status.success {
-    color: #4caf50;
-}
-
-.inventory-status.info,
-.form-status.info {
-    color: #f7c948;
-}
-
+/* Contact Form Styles */
 #contact-form {
     display: flex;
     flex-direction: column;

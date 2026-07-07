@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monach Automotive Group</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="script.js" defer></script>
 </head>
 <body>
@@ -24,9 +23,10 @@
             <li><a href="#comparison">Car Comparison</a></li>
         </ul>
     </nav>
-
+    
+    
     <h2>My name is Derrick Munyi</h2>
-    <h2>Admission Number: 23-1039</h2>
+    <h2> Admission Number: 23-1039</h2>
     <h1>This is my first HTML project</h1>
 
     <section id="top">
@@ -39,7 +39,8 @@
             <li>Bentley Continental GT</li>
             <li>Porsche 911 Turbo S</li>
         </ol>
-        <p>The Porsche 911 GT3 RS is a track-focused icon with razor-sharp handling, a naturally aspirated flat-six engine, and an aerodynamic package built for serious performance.</p>
+        <br>
+        <p>The Porsche 911 GT3 RS is a track-focused icon with razor-sharp handling, <br> a naturally aspirated flat-six engine, and an aerodynamic package built for serious performance.</p>
 
         <h3 id="why-choose-us">Why Choose Us?</h3>
         <ul>
@@ -112,49 +113,9 @@
                 </tbody>
             </table>
         </section>
-
-        <section class="comparison-section supabase-section">
-            <h2>Supabase Inventory</h2>
-            <p>This section loads car data from Supabase. Add rows to the cars table to make them appear here automatically.</p>
-            <div id="inventory-status" class="inventory-status">Loading inventory...</div>
-            <div id="cars-grid" class="cars-grid"></div>
-        </section>
     </section>
 
-    <section id="contact-form-section">
-        <h2>Contact Us</h2>
-        <p>Share your details to receive exclusive offers and the latest updates on exotic cars.</p>
-        <form id="contact-form" novalidate>
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="example@gmail.com" required>
-            </div>
-
-            <div class="form-group">
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
-            </div>
-
-            <div class="form-group">
-                <label for="gender">Gender</label>
-                <select id="gender" name="gender" required>
-                    <option value="" disabled selected>Select your gender</option>
-                    <option value="female">Female</option>
-                    <option value="male">Male</option>
-                </select>
-            </div>
-
-            <button type="submit">Submit</button>
-            <p id="form-error-message">Please fill in missing details</p>
-            <p id="form-status" class="form-status" aria-live="polite"></p>
-        </form>
-    </section>
-
+   
     <div id="popup-overlay" class="popup-overlay"></div>
     <div id="popup-modal" class="popup-modal">
         <div class="popup-header">
@@ -163,6 +124,19 @@
         </div>
         <div class="popup-body">
             <p id="popup-message"></p>
+        </div>
+        <div class="popup-footer">
+            <button id="popup-confirm-btn" class="popup-btn popup-btn-primary">OK</button>
+            <button id="popup-cancel-btn" class="popup-btn popup-btn-secondary" style="display:none;">Cancel</button>
+        </div>
+    </div>
+    <div id="popup-modal" class="popup-modal">
+        <div class="popup-header">
+            <h3 id="popup-title">Notification</h3>
+            <button id="popup-close-btn" class="popup-close-btn">&times;</button>
+        </div>
+        <div class="popup-body">
+            <p id="popup-message">Message goes here</p>
         </div>
         <div class="popup-footer">
             <button id="popup-confirm-btn" class="popup-btn popup-btn-primary">OK</button>
