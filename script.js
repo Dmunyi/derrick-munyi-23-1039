@@ -57,6 +57,7 @@ const PopupManager = {
         this.close();
     },
 
+    
     handleCancel() {
         if (this.cancelCallback) this.cancelCallback();
         this.close();
