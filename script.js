@@ -1,3 +1,18 @@
+
+// ==========================
+// SUPABASE CONFIG
+// ==========================
+
+const SUPABASE_URL =
+"https://qeiqelutrapktutdbjrl.supabase.co";
+
+const SUPABASE_ANON_KEY =
+"sb_publishable_d1HCyFbGliLNGpS4EMJnsw_92dlch3g";
+
+const client = supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY
+);
 const PopupManager = {
     overlay: null,
     modal: null,
