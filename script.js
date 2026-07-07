@@ -1,3 +1,8 @@
+const SUPABASE_URL = 'https://qeiqelutrapktutdbjrl.supabase.co/';
+const SUPABASE_ANON_KEY = 'sb_publishable_d1HCyFbGliLNGpS4EMJnsw_92dlch3g';
+
+const supabase = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+
 const PopupManager = {
     overlay: null,
     modal: null,
@@ -7,7 +12,7 @@ const PopupManager = {
     init() {
         this.overlay = document.getElementById('popup-overlay');
         this.modal = document.getElementById('popup-modal');
-        
+
         document.getElementById('popup-close-btn').addEventListener('click', () => this.close());
         document.getElementById('popup-confirm-btn').addEventListener('click', () => this.handleConfirm());
         document.getElementById('popup-cancel-btn').addEventListener('click', () => this.handleCancel());
@@ -23,11 +28,9 @@ const PopupManager = {
         titleEl.textContent = title;
         messageEl.textContent = message;
 
-        // Reset modal classes
         this.modal.className = 'popup-modal show';
         this.modal.classList.add(`popup-${type}`);
 
-        // Handle buttons
         confirmBtn.textContent = options.confirmText || 'OK';
         if (options.showCancel) {
             cancelBtn.style.display = 'block';
@@ -57,7 +60,6 @@ const PopupManager = {
         this.close();
     },
 
-    
     handleCancel() {
         if (this.cancelCallback) this.cancelCallback();
         this.close();
@@ -85,79 +87,165 @@ const PopupManager = {
     }
 };
 
-window.addEventListener('DOMContentLoaded', function() {
+function setFormStatus(message, type = 'info') {
+    const status = document.getElementById('form-status');
+    if (!status) return;
+    status.textContent = message;
+    status.className = `form-status ${type}`;
+}
+
+function renderFallbackCars(container) {
+    const fallbackCars = [
+        {
+            name: 'Lamborghini Aventador',
+            description: 'A dramatic V12 supercar with aggressive styling and unmistakable presence.',
+            top_speed: '217 mph',
+            acceleration: '2.8 sec'
+        },
+        {
+            name: 'Ferrari SF90 Stradale',
+            description: 'A plug-in hybrid Ferrari engineered for explosive acceleration and precision.',
+            top_speed: '211 mph',
+            acceleration: '2.5 sec'
+        },
+        {
+            name: 'McLaren 720S',
+            description: 'A lightweight supercar focused on razor-sharp handling and track-ready confidence.',
+            top_speed: '212 mph',
+            acceleration: '2.8 sec'
+        }
+    ];
+
+    container.innerHTML = fallbackCars.map((car) => `
+        <article class="car-card">
+            <h3>${car.name}</h3>
+            <p>${car.description}</p>
+            <div class="car-meta">
+                <span>Top Speed: ${car.top_speed}</span>
+                <span>0-60 mph: ${car.acceleration}</span>
+            </div>
+        </article>
+    `).join('');
+}
+
+function renderInventory(cars) {
+    const container = document.getElementById('cars-grid');
+    const status = document.getElementById('inventory-status');
+
+    if (!container) return;
+
+    if (!cars || cars.length === 0) {
+        container.innerHTML = '';
+        if (status) {
+            status.textContent = 'No inventory records are available yet. Add rows to the cars table in Supabase.';
+            status.className = 'inventory-status warning';
+        }
+        renderFallbackCars(container);
+        return;
+    }
+
+    container.innerHTML = cars.map((car) => `
+        <article class="car-card">
+            <h3>${car.name}</h3>
+            <p>${car.description || 'A remarkable luxury performance model.'}</p>
+            <div class="car-meta">
+                <span>Top Speed: ${car.top_speed || 'Available on request'}</span>
+                <span>0-60 mph: ${car.acceleration || 'Available on request'}</span>
+            </div>
+        </article>
+    `).join('');
+
+    if (status) {
+        status.textContent = 'Inventory loaded from Supabase.';
+        status.className = 'inventory-status success';
+    }
+}
+
+async function loadInventory() {
+    const container = document.getElementById('cars-grid');
+    const status = document.getElementById('inventory-status');
+
+    if (!container || !status) return;
+
+    if (!supabase) {
+        status.textContent = 'Supabase is not configured yet. Add your project URL and anon key in script.js.';
+        status.className = 'inventory-status warning';
+        renderFallbackCars(container);
+        return;
+    }
+
+    const { data, error } = await supabase.from('cars').select('*').order('created_at', { ascending: false }).limit(6);
+
+    if (error) {
+        status.textContent = `Unable to load inventory: ${error.message}`;
+        status.className = 'inventory-status warning';
+        renderFallbackCars(container);
+        return;
+    }
+
+    renderInventory(data);
+}
+
+window.addEventListener('DOMContentLoaded', async function() {
     PopupManager.init();
-
-    // Welcome popup
     PopupManager.info('Welcome!', 'Welcome to Exotic Car Dealership! Explore top exotic cars, featured models, and sign up for exclusive updates.');
-
-    const contactSection = document.createElement('section');
-    contactSection.id = 'contact-form-section';
-    contactSection.innerHTML = `
-        <h2>Contact Us</h2>
-        <p>Share your details to receive exclusive offers and the latest updates on exotic cars.</p>
-        <form id="contact-form" novalidate>
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="example@gmail.com" required>
-            </div>
-
-            <div class="form-group">
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
-            </div>
-
-            <div class="form-group">
-                <label for="gender">Gender</label>
-                <select id="gender" name="gender" required>
-                    <option value="" disabled selected>Select your gender</option>
-                    <option value="female">Female</option>
-                    <option value="male">Male</option>
-                </select>
-            </div>
-
-            <button type="submit">Submit</button>
-            <p id="form-error-message">Please fill in missing details</p>
-        </form>
-    `;
-
-    document.body.appendChild(contactSection);
 
     const form = document.getElementById('contact-form');
     const formErrorMessage = document.getElementById('form-error-message');
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
-        
-        // Clear previous field error styles
-        const inputs = form.querySelectorAll('input, select');
-        let isValid = true;
-        
-        inputs.forEach(input => {
-            if (!input.value.trim()) {
-                input.classList.add('error');
-                isValid = false;
-            } else {
-                input.classList.remove('error');
+
+    if (form) {
+        form.addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const inputs = form.querySelectorAll('input, select');
+            let isValid = true;
+
+            inputs.forEach((input) => {
+                if (!input.value.trim()) {
+                    input.classList.add('error');
+                    isValid = false;
+                } else {
+                    input.classList.remove('error');
+                }
+            });
+
+            if (!isValid) {
+                formErrorMessage.classList.add('show');
+                setFormStatus('Please complete the missing fields.', 'error');
+                return;
             }
-        });
-        
-        if (!isValid) {
-            formErrorMessage.classList.add('show');
-            return;
-        }
-        
-        formErrorMessage.classList.remove('show');
-        const name = document.getElementById('name').value;
-        PopupManager.success('Success!', `Thank you, ${name}! Your contact request has been received.`, {
-            onConfirm() {
-                form.reset();
-                inputs.forEach(input => input.classList.remove('error'));
+
+            formErrorMessage.classList.remove('show');
+            setFormStatus('Saving your request to Supabase...', 'info');
+
+            if (!supabase) {
+                setFormStatus('Supabase is not configured yet. Add your project URL and anon key in script.js.', 'error');
+                return;
             }
+
+            const { error } = await supabase.from('contacts').insert([{
+                name: document.getElementById('name').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                phone: document.getElementById('phone').value.trim(),
+                gender: document.getElementById('gender').value
+            }]);
+
+            if (error) {
+                setFormStatus(`Submission failed: ${error.message}`, 'error');
+                return;
+            }
+
+            setFormStatus('Your request was saved successfully.', 'success');
+            const name = document.getElementById('name').value.trim();
+            PopupManager.success('Success!', `Thank you, ${name}! Your contact request has been received.`, {
+                onConfirm() {
+                    form.reset();
+                    inputs.forEach((input) => input.classList.remove('error'));
+                    setFormStatus('', 'info');
+                }
+            });
         });
-    });
+    }
+
+    await loadInventory();
 });
