@@ -13,6 +13,8 @@ const client = supabase.createClient(
     SUPABASE_URL,
     SUPABASE_ANON_KEY
 );
+const TABLE_NAME = 'derrick';
+
 const PopupManager = {
     overlay: null,
     modal: null,
@@ -201,7 +203,7 @@ window.addEventListener('DOMContentLoaded', function() {
             status.innerHTML = "Connecting...";
 
             try {
-                const { data, error } = await client.from('derrick').insert([
+                const { data, error } = await client.from(TABLE_NAME).insert([
                     {
                         username: username,
                         email: email,
