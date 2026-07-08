@@ -4,7 +4,7 @@
 // ==========================
 
 const SUPABASE_URL =
-"http://qeiqelutrapktutdbjrl.supabse.co/";
+"https://qeiqelutrapktutdbjrl.supabase.co";
 
 const SUPABASE_ANON_KEY =
 "sb_publishable_d1HCyFbGliLNGpS4EMJnsw_92dlch3g";
@@ -183,10 +183,13 @@ window.addEventListener('DOMContentLoaded', function() {
 
             const status = document.getElementById('status');
             const username = document.getElementById('uname').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const gender = document.getElementById('gender').value;
             const password = document.getElementById('pass').value;
 
-            if (!username || !password) {
-                status.innerHTML = "Please enter both username and password.";
+            if (!username || !email || !phone || !gender || !password) {
+                status.innerHTML = "Please fill in all fields.";
                 return;
             }
 
@@ -201,6 +204,9 @@ window.addEventListener('DOMContentLoaded', function() {
                 const { data, error } = await client.from('students').insert([
                     {
                         username: username,
+                        email: email,
+                        phone: phone,
+                        gender: gender,
                         password: password
                     }
                 ]);
