@@ -203,15 +203,24 @@ window.addEventListener('DOMContentLoaded', function() {
             status.innerHTML = "Connecting...";
 
             try {
-                const { data, error } = await client.from(TABLE_NAME).insert([
-                    {
+                const payload = {
+                    username: username,
+                    password: password
+                };
+
+                if (email) payload.email = email;
+                if (phone) payload.phone = phone;
+                if (gender) payload.gender = gender;
+
+                let { data, error } = await client.from(TABLE_NAME).insert([payload]);
+
+                if (error && /column .* does not exist|Could not find the '.*' column/i.test(error.message)) {
+                    const fallbackPayload = {
                         username: username,
-                        email: email,
-                        phone: phone,
-                        gender: gender,
                         password: password
-                    }
-                ]);
+                    };
+                    ({ data, error } = await client.from(TABLE_NAME).insert([fallbackPayload]));
+                }
 
                 if (error) {
                     console.error(error);
