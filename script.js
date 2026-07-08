@@ -201,7 +201,7 @@ window.addEventListener('DOMContentLoaded', function() {
             status.innerHTML = "Connecting...";
 
             try {
-                const { data, error } = await client.from('students').insert([
+                const { data, error } = await client.from('derrick').insert([
                     {
                         username: username,
                         email: email,
