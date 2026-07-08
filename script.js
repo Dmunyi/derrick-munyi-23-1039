@@ -4,7 +4,7 @@
 // ==========================
 
 const SUPABASE_URL =
-"https://qeiqelutrapktutdbjrl.supabase.co";
+"http://qeiqelutrapktutdbjrl.supabse.co/";
 
 const SUPABASE_ANON_KEY =
 "sb_publishable_d1HCyFbGliLNGpS4EMJnsw_92dlch3g";
@@ -175,4 +175,50 @@ window.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    const studentForm = document.getElementById('studentForm');
+    if (studentForm) {
+        studentForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const status = document.getElementById('status');
+            const username = document.getElementById('uname').value.trim();
+            const password = document.getElementById('pass').value;
+
+            if (!username || !password) {
+                status.innerHTML = "Please enter both username and password.";
+                return;
+            }
+
+            if (password.length < 6) {
+                status.innerHTML = "Password must be at least 6 characters.";
+                return;
+            }
+
+            status.innerHTML = "Connecting...";
+
+            try {
+                const { data, error } = await client.from('students').insert([
+                    {
+                        username: username,
+                        password: password
+                    }
+                ]);
+
+                if (error) {
+                    console.error(error);
+                    status.innerHTML = "Error: " + error.message;
+                    alert("SUPABASE ERROR\n\n" + error.message);
+                    return;
+                }
+
+                status.innerHTML = "<span style='color:green;font-weight:bold;'>Submission received. Saved to Supabase.</span>";
+                studentForm.reset();
+            } catch (err) {
+                console.error(err);
+                status.innerHTML = "JavaScript Error: " + err.message;
+                alert("JAVASCRIPT ERROR\n\n" + err.message);
+            }
+        });
+    }
 });

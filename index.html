@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Monach Automotive Group</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    
 </head>
 <body>
     <nav class="top-nav">
@@ -113,6 +113,23 @@
                 </tbody>
             </table>
         </section>
+
+        <section id="student-form-section" class="student-form-section">
+            <h2>Student Submission</h2>
+            <p>Enter your username and password to submit data through Supabase.</p>
+            <form id="studentForm">
+                <div class="form-group">
+                    <label for="uname">Username</label>
+                    <input type="text" id="uname" name="uname" required>
+                </div>
+                <div class="form-group">
+                    <label for="pass">Password</label>
+                    <input type="password" id="pass" name="pass" required>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+            <div id="status" class="status-message"></div>
+        </section>
     </section>
 
    
@@ -145,6 +162,6 @@
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="app.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
