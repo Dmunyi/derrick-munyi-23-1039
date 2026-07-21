@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Semantic HTML</title>
+    <link rel="stylesheet" href="semantics.css" />
+  
+  </head>
+  <body>
+    
+    <header class="site-header">
+      <h1>Semantic HTML</h1>
+     
+    </header>
+
+    
+    <main id="main-content">
+      <!-- Section for semantic tags overview -->
+      <section id="semantics" class="content-section">
+        <h2>10 Semantic Elements Used</h2>
+        <div class="semantic-grid">
+          <article class="card">
+            <h3>Header</h3>
+            <p>Defines the introductory content of the page.</p>
+          </article>
+          <article class="card">
+            <h3>Main</h3>
+            <p>Represents the primary content of the document.</p>
+          </article>
+          <article class="card">
+            <h3>Section</h3>
+            <p>Groups related content into meaningful sections.</p>
+          </article>
+          <article class="card">
+            <h3>Article</h3>
+            <p>Holds self-contained content such as a news post.</p>
+          </article>
+          <article class="card">
+            <h3>Aside</h3>
+            <p>Contains supporting or related information.</p>
+          </article>
+          <article class="card">
+            <h3>Figure</h3>
+            <p>Wraps media content like images.</p>
+          </article>
+          <article class="card">
+            <h3>Figcaption</h3>
+            <p>Provides a caption for a figure.</p>
+          </article>
+          <article class="card">
+            <h3>Footer</h3>
+            <p>Contains closing information and links.</p>
+          </article>
+          <article class="card">
+            <h3>Time</h3>
+            <p>Represents a specific time or date.</p>
+          </article>
+          <article class="card">
+            <h3>Details</h3>
+            <p>Hides extra information until opened.</p>
+          </article>
+        </div>
+
+      </section>
+
+      <!-- Image gallery section -->
+      <section id="gallery" class="content-section">
+        <h2>Image Gallery</h2>
+        <div class="gallery">
+          <figure class="gallery-item">
+            <img src="images/911 Turbo S.png" alt="911 Turbo S sports car" loading="lazy" />
+            <figcaption>911 Turbo S</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="images/bentley continental gt.png" alt="Bentley Continental GT luxury car" loading="lazy" />
+            <figcaption>Bentley Continental GT</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <img src="images/images.jfif" alt="Lamborghini Aventador SVJ car" loading="lazy" />
+            <figcaption>Lamborghini Aventador SVJ</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- Contact form section -->
+      <section id="contact" class="content-section">
+        <h2>Contact Form</h2>
+        <form class="contact-form">
+          <label for="first-name">First Name</label>
+          <input type="text" id="first-name" name="first-name" placeholder="Enter first name" required />
+
+          <label for="second-name">Second Name</label>
+          <input type="text" id="second-name" name="second-name" placeholder="Enter second name" required />
+
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="Enter email" required />
+
+          <label for="phone">Phone</label>
+          <input type="tel" id="phone" name="phone" placeholder="Enter phone number" />
+
+          <label for="date">Date</label>
+          <input type="date" id="date" name="date" />
+
+          <label for="search">Search</label>
+          <input type="search" id="search" name="search" placeholder="Search here" />
+
+          <label for="attachment">Attach File</label>
+          <input type="file" id="attachment" name="attachment" />
+
+          <fieldset>
+            <legend>Preferred Contact</legend>
+            <label><input type="radio" name="contact-type" value="email" /> Email</label>
+            <label><input type="radio" name="contact-type" value="phone" /> Phone</label>
+          </fieldset>
+
+          <label class="checkbox-row">
+            <input type="checkbox" name="agree" /> I agree to the terms.
+          </label>
+
+          <button type="submit">Submit</button>
+        </form>
+      </section>
+    </main>
+
+    <!-- Footer area -->
+    <footer class="site-footer">
+      <p>&copy; 2026 Semantic HTML</p>
+    </footer>
+  </body>
+</html>
